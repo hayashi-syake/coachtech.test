@@ -1,0 +1,91 @@
+１．データベース
+２．DMBS　データベースマネジメントシステム
+３．2次元の表形式
+４．列
+５．行
+６．テーブル
+７．SQL
+８．MySQL
+９．mysql -u root -p
+１０．数値型
+
+MariaDB [(none)]> create databese coachtech;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'databese coachtech' at line 1
+MariaDB [(none)]> create database coachtech;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [(none)]> create table products;
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> create table prpducts(id int auto_increment primary key, name varchar(20) not null, price int not null, expiration_date date not null, number int not null);
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> use produces;
+ERROR 1049 (42000): Unknown database 'produces'
+MariaDB [(none)]> use products;
+ERROR 1049 (42000): Unknown database 'products'
+MariaDB [(none)]> use coachtech;
+Database changed
+MariaDB [coachtech]> create table products(id int auto_increment primary key, name varchar(20) not null, price int not null, expiration_date date not null, number int not null);
+Query OK, 0 rows affected (0.015 sec)
+
+MariaDB [coachtech]> describe products;
++-----------------+-------------+------+-----+---------+----------------+
+| Field           | Type        | Null | Key | Default | Extra          |
++-----------------+-------------+------+-----+---------+----------------+
+| id              | int(11)     | NO   | PRI | NULL    | auto_increment |
+| name            | varchar(20) | NO   |     | NULL    |                |
+| price           | int(11)     | NO   |     | NULL    |                |
+| expiration_date | date        | NO   |     | NULL    |                |
+| number          | int(11)     | NO   |     | NULL    |                |
++-----------------+-------------+------+-----+---------+----------------+
+5 rows in set (0.006 sec)
+
+MariaDB [coachtech]> insert into products set id=1, name='納豆', price=250, expiration_date='2021-0417', number=3;
+Query OK, 1 row affected, 1 warning (0.009 sec)
+
+MariaDB [coachtech]> show table products;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'products' at line 1
+MariaDB [coachtech]> select*from products;
++----+------+-------+-----------------+--------+
+| id | name | price | expiration_date | number |
++----+------+-------+-----------------+--------+
+|  1 | 納豆 |   250 | 0000-00-00      |      3 |
++----+------+-------+-----------------+--------+
+1 row in set (0.003 sec)
+
+MariaDB [coachtech]> insert into products set id=1, name='納豆', price=250, expiration_date='2021-04-17', number=3;
+ERROR 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
+MariaDB [coachtech]> update products set expiration_date = '2021-04-17' where id = 1;
+Query OK, 1 row affected (0.005 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [coachtech]> select*from products;
++----+------+-------+-----------------+--------+
+| id | name | price | expiration_date | number |
++----+------+-------+-----------------+--------+
+|  1 | 納豆 |   250 | 2021-04-17      |      3 |
++----+------+-------+-----------------+--------+
+1 row in set (0.000 sec)
+
+MariaDB [coachtech]> insert into products set id=2, name='豆腐', price=170, expiration_date='2021-04-23', number=2;
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [coachtech]> insert into products set id=3, name='玉ねぎ', price=120, expiration_date='2021-04-21', number=4;
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [coachtech]> insert into products set id=4, name='ニンニク', price=250, expiration_date='2021-04-09', number=5;
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [coachtech]> insert into products set id=5, name='キムチ', price=300, expiration_date='2021-04-22', number=2;
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [coachtech]> select*from products;
++----+----------+-------+-----------------+--------+
+| id | name     | price | expiration_date | number |
++----+----------+-------+-----------------+--------+
+|  1 | 納豆     |   250 | 2021-04-17      |      3 |
+|  2 | 豆腐     |   170 | 2021-04-23      |      2 |
+|  3 | 玉ねぎ   |   120 | 2021-04-21      |      4 |
+|  4 | ニンニク |   250 | 2021-04-09      |      5 |
+|  5 | キムチ   |   300 | 2021-04-22      |      2 |
++----+----------+-------+-----------------+--------+
+5 rows in set (0.002 sec)
